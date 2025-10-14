@@ -33,7 +33,7 @@
 git clone https://github.com/Viktorikata/To-Do-list.git
 ```
 
-2. Перейти в папку проекта
+2. Перейти в папку проекта:
 ```bash
 cd To-Do-list
 ```
@@ -43,17 +43,17 @@ cd To-Do-list
 npm install
 ```
 
-4. Запуск dev-сервера
+4. Запуск dev-сервера:
 ```bash
 npm run dev
 ```
 
-5. Сборка прод-версии
+5. Сборка прод-версии:
 ```bash
 npm run build
 ```
 
-6. Локальный предпросмотр собранной версии
+6. Локальный предпросмотр собранной версии:
 ```bash
 npm run preview
 ```
