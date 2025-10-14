@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# Todo list
+Приложение для добавления, редактирования, удаления, фильтрации (все, активные, выполненные) задач.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Стек
+- React 18
+- TypeScript
+- Vite 
+- Браузерное хранилище localStorage 
 
-Currently, two official plugins are available:
+## Функциональность
+- Добавление задачи (input + кнопка "Добавить")
+- Отображение списка задач
+- Возможность отметить задачу как выполненную (чекбокс)
+- Удаление задачи
+- Фильтры: Все / Активные / Выполненные (фильтрация на клиенте)
+- Сохранение задач в localStorage (чтобы список не пропадал при обновлении страницы)
+- Возможность редактировать текст задачи
+- Подсчёт количества активных задач («Осталось X задач»)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## Структура компонентов:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+- App.tsx — корневой компонент
+- TodoForm.tsx — форма добавления задачи
+- TodoList.tsx — список задач
+- TodoItem.tsx — отдельная задача
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Запуск проекта
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Клонировать репозиторий:
+```bash
+git clone https://github.com/Viktorikata/To-Do-list.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Перейти в папку проекта
+```bash
+cd user-manager-app
 ```
+
+3. Установить зависимости: 
+```bash
+npm install
+```
+
+4. Запуск dev-сервера
+```bash
+npm run dev
+```
+
+5. Сборка прод-версии
+```bash
+npm run build
+```
+
+6. Локальный предпросмотр собранной версии
+```bash
+npm run preview
+
+ ---
+
+ ## Автор
+
+ [Виктория (Viktorikata)](https://github.com/Viktorikata)

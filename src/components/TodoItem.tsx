@@ -9,33 +9,25 @@ type Props = {
 }
 
 function TodoItem({todo, onToggle, onDelete, onEdit}: Props) {
-    const [isEditing, setisEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     const [draft, setDraft] = useState(todo.text);
 
     const save = () => {
         const trimmed = draft.trim();
         if(trimmed && trimmed !== todo.text) 
         { onEdit(todo.id, trimmed);}
-        setisEditing(false);
+        setIsEditing(false);
     }
 
     const cancel = () => {
         setDraft(todo.text);
-        setisEditing(false);
+        setIsEditing(false);
     }
 
 
     return (
-        <li
-            style={{
-                display: 'flex',
-                alignItems:'center',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid #eee',
-                padding: '8px 0',
-            }}
-            >
-                <label style={{display: 'flex', alignItems: 'center', gap: 8, flex: 1}}>
+        <li>
+                <label>
                     <input
                         type="checkbox"
                         checked={todo.completed}
@@ -49,29 +41,25 @@ function TodoItem({todo, onToggle, onDelete, onEdit}: Props) {
                             onChange={(e)=>setDraft(e.target.value)}
                             onKeyDown={(e)=> {
                                 if(e.key === 'Enter') save();
-                                if (e.key === "Escape") cancel ();
+                                if (e.key === "Escape") cancel();
                             }}
-                            style= {{flex: 1, padding: '6px 8px', borderRadius: 6, border: '1px solid #ddd'}}
                         />
                         ) : (
-                            <span
-                                style={{textDecoration: todo.completed ? 'line-through' : 'none',
-                                opacity: todo.completed ? 0.6 : 1,}}
-                            >
+                            <span className={todo.completed ? 'completed' : ''}>
                                 {todo.text}
                             </span>
                         )}
                 </label>
-                <div style={{display:'flex', gap: 8}}>
+                <div>
                     {isEditing ? (
                 <>
-                 <button onClick={save} style={{padding: '4px 8px'}}>Сохранить</button>
-                 <button onClick={cancel} style={{padding: '4px 8px'}}>Отмена</button>
+                 <button onClick={save}>Сохранить</button>
+                 <button onClick={cancel}>Отмена</button>
                 </>
                 ) : (
                 <>
-                <button onClick={() => setisEditing(true)} style={{padding: '4px 8px'}}>Редакт</button>
-                <button onClick={() => onDelete(todo.id)} style={{padding: '4px 8px'}}>Удалить</button>
+                <button onClick={() => setIsEditing(true)}>Редакт</button>
+                <button onClick={() => onDelete(todo.id)}>Удалить</button>
                 </>
                 )}
                 </div>       

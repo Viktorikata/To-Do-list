@@ -19,20 +19,14 @@ function TodoForm({onAdd}: Props) {
 
     return (
         <form
-            onSubmit={handleSubmit} 
-            style={{display: "flex", gap: 8, marginTop: 24 }}>
+            onSubmit={handleSubmit} >
             <input
                 type="text"
                 placeholder='Введите задачу'
                 value={text}
                 onChange={(e)=> setText(e.target.value)}
-                style={{flex: 1, padding:10, borderRadius:8, border: '1px solid #ddd'}}
             />
-            <button
-                type='submit'
-                    style={{ padding: "10px, 16px", borderRadius:8, border:'none', background: '#222', color:'#fff', cursor:'pointer'}}>
-                     Добавить
-            </button>
+            <button type='submit'>Добавить</button>
         </form>
     );
 }

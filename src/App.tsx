@@ -1,12 +1,37 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { Todo, Filter } from './types'
 import TodoForm from './TodoForm';
 import TodoItem from './components/TodoItem';
+import TodoList from './components/TodoList';
+
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+  try {
+    const saved = localStorage.getItem('todos');
+    return saved ? JSON.parse(saved) : [];
+  } catch {
+    return [];
+  }
+  });
   const [filter, setFilter] = useState<Filter>('all');
+
+  const activeCount = useMemo(
+  () => todos.filter(t => !t.completed).length,
+  [todos]
+  );
+
+  const filteredTodos = useMemo(() => {
+  switch (filter) {
+    case 'active':
+      return todos.filter(t => !t.completed);
+    case 'completed':
+      return todos.filter(t => t.completed);
+    default:
+      return todos;
+  }
+  }, [todos, filter]);
 
   useEffect(() => {
     const saved = localStorage.getItem('todos');
@@ -38,62 +63,53 @@ function App() {
 
 
   return (
-    <div style={{maxWidth: 680, margin: '48px auto', padding: 24}}>
+    <div  className="todo-container">
       <h1>Todo List</h1>
-      <p style={{opacity: 0.7, marginTop:8 }}>Форма и список</p>
+      <p>Форма и список</p>
       
       <TodoForm onAdd={addTodo}/>
 
-        <div style={{display: 'flex', gap: 8, marginTop: 16}}>
+        <div className="filter-bar">
           <button
               onClick={()=> setFilter('all')}
-              style={{background: filter === 'all' ? '#222' : '#eee', color: filter === 'all' ? '#fff' : '#000', padding:'6px, 10px', borderRadius: 6, border: 'none', cursor:'pointer'}}
+             className={filter === 'all' ? 'active' : ''}
           >
             Все
           </button>
 
           <button
             onClick={() => setFilter('active')}
-            style={{ background: filter === 'active' ? '#222' : '#eee', color: filter === 'active' ? '#fff' : '#000', padding: '6px 10px', borderRadius: 6, border: 'none', cursor: 'pointer' }}
+            className={filter === 'active' ? 'active' : ''}
           >
             Активные
           </button>
 
           <button
             onClick={() => setFilter('completed')}
-            style={{ background: filter === 'completed' ? '#222' : '#eee', color: filter === 'completed' ? '#fff' : '#000', padding: '6px 10px', borderRadius: 6, border: 'none', cursor: 'pointer' }}
+            className={filter === 'completed' ? 'active' : ''}
           >
             Выполненные
           </button>
 
+            <span> Осталось: {activeCount} </span>
+
         </div>
 
-      <ul style={{marginTop: 24, padding: 0, listStyle:"none"}}>
+      <TodoList
+        todos={filteredTodos}
+        onEdit={handleEdit}
+        onToggle={(id) =>
+          setTodos(prev =>
+             prev.map(todo =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            )
+          )
+        }
+        onDelete={(id) =>
+          setTodos(prev => prev.filter(todo => todo.id !== id))
+        }
+      />
 
-        {todos
-          .filter(t=> {
-            if (filter === "active") return !t.completed;
-            if (filter === "completed") return t.completed;
-            return true;
-          })
-          .map(t => (
-          <TodoItem
-            key={t.id} 
-            todo={t}
-            onEdit={handleEdit}
-            onToggle={(id)=>
-              setTodos(prev =>
-                prev.map(todo=>
-                  todo.id === id ? {...todo, completed: !todo.completed} : todo              
-                )
-              )
-            }
-            onDelete={(id) =>
-              setTodos(prev=> prev.filter(todo=> todo.id !== id))
-            }
-          />
-        ))}
-      </ul>
     </div>
   );
 }
