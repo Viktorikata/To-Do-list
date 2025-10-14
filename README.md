@@ -35,7 +35,7 @@ git clone https://github.com/Viktorikata/To-Do-list.git
 
 2. Перейти в папку проекта
 ```bash
-cd user-manager-app
+cd To-Do-list
 ```
 
 3. Установить зависимости: 
