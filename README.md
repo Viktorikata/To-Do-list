@@ -56,6 +56,7 @@ npm run build
 6. Локальный предпросмотр собранной версии
 ```bash
 npm run preview
+```
 
  ---
 
