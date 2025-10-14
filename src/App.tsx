@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import type { Todo, Filter } from './types'
 import TodoForm from './TodoForm';
-import TodoItem from './components/TodoItem';
 import TodoList from './components/TodoList';
 
 
@@ -33,12 +32,6 @@ function App() {
   }
   }, [todos, filter]);
 
-  useEffect(() => {
-    const saved = localStorage.getItem('todos');
-    if(saved) {
-      setTodos(JSON.parse(saved))
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
