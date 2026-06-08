@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import type { Todo, Filter } from './types'
 import TodoForm from './TodoForm';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { Todo } from '../types';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 function TodoItem({todo, onToggle, onDelete, onEdit}: Props) {
     const [isEditing, setIsEditing] = useState(false);
-    const [draft, setDraft] = useState(todo.text);
+    const [draft, setDraft] = useState(todo.text); 
 
     const save = () => {
         const trimmed = draft.trim();
